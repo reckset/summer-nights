@@ -1,48 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Pickens to Pickett</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, intial-scale=1">
-</head>
+  <head>
+    <title>Pickens to Pickett</title>
+    <meta charset="utf-8">
+  </head>
 
-<body onload="getPickensTds()">
-Let's catch some TDs!
-    <footer>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-    </footer>
-</body>
+  <body>
+  Let's catch some TDs!
+  <div>
+    <textarea id="messages" name="messages" rows="10" cols="50">Messages</textarea></br>
+    <form id="form1">
+      <input type="button" value="Get TDs" onclick="tallyTds()"/>
+    </form>
+  </div>
+  </body>
 </html>
 <script>
 
-function getPickensTds(){
-    let response = fetch ('https://tkle722iz2.execute-api.us-east-2.amazonaws.com/TallyPickensTouchdowns',
-        {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    )
-}
-
-function getTds() {
-fetch('https://tkle722iz2.execute-api.us-east-2.amazonaws.com/TallyPickensTouchdowns')
-  .then(response => {
-    if (response.ok) {
-      return response.json(); // Parse the response data as JSON
-    } else {
-      throw new Error('API request failed');
-    }
-  })
-  .then(data => {
-    // Process the response data here
-    console.log(data); // Example: Logging the data to the console
-  })
-  .catch(error => {
-    // Handle any errors here
-    console.error(error); // Example: Logging the error to the console
+function tallyTds(){
+  $.ajax({
+      url: 'https://hi3ubxtqyl.execute-api.us-east-2.amazonaws.com/TallyPickensTouchdowns',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
+      method: 'GET',
+      success: function(response) {
+        const parsedData = JSON.parse(response);
+        document.getElementById('messages').value = parsedData;
+      },
+      error: function(xhr, status, error) {
+        document.getElementById('messages').value = error;
+      }
   });
 }
+
 </script>
