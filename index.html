@@ -30,7 +30,7 @@ function tallyTds(){
       method: 'GET',
       success: function(response) {
         //const parsedData = JSON.parse(response);
-        const parsedData = response;
+        const parsedData = JSON.stringify(response, null, 2);
         document.getElementById('messages').value = parsedData;
       },
       error: function(xhr, status, error) {
