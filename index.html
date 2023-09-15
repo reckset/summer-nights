@@ -29,7 +29,8 @@ function tallyTds(){
       },
       method: 'GET',
       success: function(response) {
-        const parsedData = JSON.parse(response);
+        //const parsedData = JSON.parse(response);
+        const parsedData = response;
         document.getElementById('messages').value = parsedData;
       },
       error: function(xhr, status, error) {
