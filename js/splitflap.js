@@ -1,53 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Pickens to Pickett</title>
-    <meta charset="utf-8">
-  </head>
-
-  <link rel="stylesheet" href="css/splitflap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
-  <body>
-  <!--
-  Let's catch some TDs!
-  <div>
-    <textarea id="messages" name="messages" rows="10" cols="50">Messages</textarea></br>
-    <form id="form1">
-      <input type="button" value="Get TDs" onclick="tallyTds()"/>
-    </form>
-  </div>
--->
-
-  <div class="center">
-  </div>
-
-  </body>
-</html>
-<script>
-
 // Set up flaps ////////////////////////////////////////////
 speed = .2; // seconds
-//beginStr = "BALTIMORE".toUpperCase().split("");
-
-const url = "https://mvr35kmrh0.execute-api.us-east-2.amazonaws.com/api/touchdowns"
-
-fetch(url, {
-  headers: {
-    'Content-Type': 'application/json',
-  }
-})
-  .then((response) => response.json())
-  .then((json) => console.log(json));
-
-beginStr = "9".split("");
-endStr = response.Dave;
-//endStr = "VANCOUVER".toUpperCase().split("");
-//endStr = tallyTds().split("");
-//endStr = tallyTds();
-//endStr = endStr.split("");
-// 0-9, spaces only
+beginStr = "BALTIMORE".toUpperCase().split("");
+endStr = "VANCOUVER".toUpperCase().split("");
+// A-Z, 0-9, spaces only
 
 amountOfFlaps = (beginStr.length >= endStr.length) ? beginStr.length : endStr.length;
 
@@ -73,7 +28,9 @@ for (var x = 0; x < a1.length; x++) {
 
 
 // And even more ///////////////////////////////////////////
-char = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' '];
+char = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+        'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+        'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' '];
 
 strCount = [], flag = [];
 
@@ -153,5 +110,3 @@ function changeDestination() {
     beginStr = tempArr.slice();
   }, 3000);
 }
-
-</script>
