@@ -1,157 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pickens to Pickett</title>
+    <title>Pickett to Pickens</title>
     <meta charset="utf-8">
   </head>
 
-  <link rel="stylesheet" href="css/splitflap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <body>
-  <!--
-  Let's catch some TDs!
-  <div>
-    <textarea id="messages" name="messages" rows="10" cols="50">Messages</textarea></br>
-    <form id="form1">
-      <input type="button" value="Get TDs" onclick="tallyTds()"/>
-    </form>
-  </div>
--->
-
-  <div class="center">
-  </div>
-
+    <div class="row">
+      <div class="col-sm-4"><p>Dave: <span id="dave"></p></div>
+      <div class="col-sm-4"><p>Rex: <span id="rex"></p></div>
+      <div class="col-sm-4"><p>Tim: <span id="tim"></p></div>
+    </div>
   </body>
 </html>
+
 <script>
 
-// Set up flaps ////////////////////////////////////////////
-speed = .2; // seconds
-//beginStr = "BALTIMORE".toUpperCase().split("");
-
 const url = "https://mvr35kmrh0.execute-api.us-east-2.amazonaws.com/api/touchdowns"
+var obj;
+var endStr;
 
 fetch(url, {
   headers: {
     'Content-Type': 'application/json',
   }
 })
-  .then((response) => response.json())
-  .then((json) => console.log(json));
-
-beginStr = "9".split("");
-endStr = response.Dave;
-//endStr = "VANCOUVER".toUpperCase().split("");
-//endStr = tallyTds().split("");
-//endStr = tallyTds();
-//endStr = endStr.split("");
-// 0-9, spaces only
-
-amountOfFlaps = (beginStr.length >= endStr.length) ? beginStr.length : endStr.length;
-
-div = document.querySelector(".center");
-html = "";
-for (var x = 0; x < amountOfFlaps; x++) {
-  html += '<div class=splitflap><div class="top"></div><div class="bottom"></div><div class="nextHalf"></div><div class="nextFull"></div></div>';
-}
-
-div.innerHTML = html;
-
-
-// Set up more stuff ///////////////////////////////////////
-a1 = document.querySelectorAll(".top");
-a2 = document.querySelectorAll(".bottom");
-b1 = document.querySelectorAll(".nextFull");
-b2 = document.querySelectorAll(".nextHalf");
-
-for (var x = 0; x < a1.length; x++) {
-  a2[x].style.animationDuration = speed + "s";
-  b2[x].style.animationDuration = speed + "s";
-}
-
-
-// And even more ///////////////////////////////////////////
-char = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' '];
-
-strCount = [], flag = [];
-
-for (var x = 0; x < amountOfFlaps; x++) {
-  
-  if (beginStr.length != amountOfFlaps)
-    {
-      for (var x = 0; x < amountOfFlaps - beginStr.length; x++)
-        {
-          beginStr.push(" ");
-        }
-    }
-  else if (endStr.length != amountOfFlaps)
-    {
-      for (var x = 0; x < amountOfFlaps - endStr.length; x++)
-        {
-          endStr.push(" ");
-        }
-    }
-}
-for (var x = 0; x<amountOfFlaps; x++){
-  strCount[x] = char.indexOf(beginStr[x]);
-  flag[x] = false, flag2 = true;
-}
-
-// Flip them flaps /////////////////////////////////////////
-setInterval(function() {
-  for (var x = 0; x < amountOfFlaps; x++) {
-
-    if (b1[x].innerHTML == endStr[x]) dontFlipIt(x);
-    else flipIt(x);
-
-    if (flag.every(function(e) {
-        return e
-      }) && flag2) flag2 = false, changeDestination();
-  }
-
-}, speed * 1000);
-
-
-////////////////////////////////////////////////////////////
-// Flap flipping functions /////////////////////////////////
-////////////////////////////////////////////////////////////
-function flipIt(x) {
-  a1[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
-  a2[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
-  b1[x].innerHTML = char[strCount[x]];
-  b2[x].innerHTML = char[strCount[x]];
-
-  a2[x].classList.remove("flip1");
-  a2[x].offsetWidth = a2[x].offsetWidth;
-  a2[x].classList.add("flip1");
-  b2[x].classList.remove("flip2");
-  b2[x].offsetWidth = b2[x].offsetWidth;
-  b2[x].classList.add("flip2");
-
-  if (strCount[x] > char.length - 2) strCount[x] = 0;
-  else strCount[x]++;
-}
-
-function dontFlipIt(x) {
-  flag[x] = true;
-  a2[x].classList.remove("flip2");
-  a2[x].style.backgroundColor = "#3BB6eB";
-  b2[x].style.backgroundColor = "#3BB6eB";
-  a1[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
-  a2[x].innerHTML = char[(strCount[x] == 0) ? char.length - 1 : strCount[x] - 1];
-}
-
-function changeDestination() {
-  setTimeout(function() {
-    flag.fill(false);
-    flag2 = true;
-    
-    var tempArr = endStr.slice();
-    endStr = beginStr.slice();
-    beginStr = tempArr.slice();
-  }, 3000);
-}
+  .then(response => response.json())
+  .then(data => {
+    obj = data;
+  })
+  .then(() => {
+    document.getElementById("dave").innerHTML = obj.Dave;
+    document.getElementById("rex").innerHTML = obj.Rex;
+    document.getElementById("tim").innerHTML = obj.Tim;
+  });
 
 </script>
