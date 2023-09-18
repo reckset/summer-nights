@@ -19,10 +19,32 @@
 
   <body>
     <div class="container h-100">
-      <div class="row h-100">
-        <div class="col-sm-4 text-center my-auto"><p class="display-score">Dave: <span id="dave"></p></div>
-        <div class="col-sm-4 text-center my-auto"><p class="display-score">Rex: <span id="rex"></p></div>
-        <div class="col-sm-4 text-center my-auto"><p class="display-score">Tim: <span id="tim"></p></div>
+      <div class="row">
+        
+        <div class="col-sm-4 text-center">
+          <div class="scoreboard" id="scoreboard-dave">
+            <p>Dave: <span id="dave"></span></p>
+          </div>
+        </div>
+
+        <div class="col-sm-4 text-center">
+          <div class="scoreboard" id="scoreboard-rex">
+            <p>Rex: <span id="rex"></span></p>
+          </div>
+        </div>
+
+        <div class="col-sm-4 text-center">
+          <div class="scoreboard" id="scoreboard-tim">
+            <p>Tim: <span id="tim"></span></p>
+          </div>
+        </div>
+
+        <!--
+        <div class="col-sm-4 text-center my-auto"><p class="display-score">Dave: <span id="dave"></span></p></div>
+        <div class="col-sm-4 text-center my-auto"><p class="display-score">Rex: <span id="rex"></span></p></div>
+        <div class="col-sm-4 text-center my-auto"><p class="display-score">Tim: <span id="tim"></span></p></div>
+        -->
+
       </div>
     </div> 
   </body>
@@ -47,6 +69,22 @@ fetch(url, {
     document.getElementById("dave").innerHTML = obj.Dave;
     document.getElementById("rex").innerHTML = obj.Rex;
     document.getElementById("tim").innerHTML = obj.Tim;
+
+    // highlight current leader
+    if ((obj.Dave > obj.Rex) && (obj.Dave > obj.Tim)) {
+      document.getElementById("scoreboard-dave").style.backgroundColor = "green";
+      document.getElementById("scoreboard-dave").style.color = "white";
+    }
+    else if ((obj.Rex > obj.Dave) && (obj.Rex > obj.Tim)) {
+      document.getElementById("scoreboard-rex").style.backgroundColor = "green";
+      document.getElementById("scoreboard-rex").style.color = "white";
+    }
+    else if ((obj.Tim > obj.Dave) && (obj.Tim > obj.Rex)) {
+      document.getElementById("scoreboard-tim").style.backgroundColor = "green";
+      document.getElementById("scoreboard-tim").style.color = "white";
+    }
+    
+    
   });
 
 </script>
