@@ -1,0 +1,10 @@
+body {
+    background-image: url('../img/nfl.jpeg');
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+}
+
+.display-score {
+    color: yellow;
+}
