@@ -7,8 +7,18 @@ body {
 
 .scoreboard {
     background-color: white;
-    color: #000;
+    border: solid black 1px;
+    color: black;
     opacity: .5;
     z-index: 999;
-    /*width: 50%;*/
+}
+
+.stats {
+    font-size: calc(8px + 0.390625vw);
+    color: black;
+}
+
+.stats-result {
+    font-size: calc(8px + 0.390625vw);
+    color: green;
 }

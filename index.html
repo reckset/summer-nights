@@ -5,8 +5,11 @@
     <meta charset="utf-8">
   </head>
 
-  <!-- main CSS -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="css/main.css">
+
+  <!-- Main js -->
+  <script src="js/main.js"></script>
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -17,74 +20,98 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <body>
+  <body onload="TallyTds()">
     <div class="container h-100">
       <div class="row">
         
-        <div class="col-sm-4 text-center">
-          <div class="scoreboard" id="scoreboard-dave">
-            <p>Dave: <span id="dave"></span></p>
+        <!-- DAVE -->
+        <div class="col-sm-4 text-center scoreboard">
+          <div class="row">
+            <div class="col-sm-12" id="scoreboard-dave">
+              <p class="stats-total">Dave: <span id="dave"></span></p>
+            </div>
+          </div>
+          <div class="row stats">
+            <div class="col-sm-4">
+              Week 1: <span class="stats-result" id="week-1">0</span>
+            </div>
+            <div class="col-sm-4">
+              Week 4: <span class="stats-result" id="week-4">-</span>
+            </div>
+            <div class="col-sm-4">
+              Week 8: <span class="stats-result" id="week-8">-</span>
+            </div>
+          </div>
+          <div class="row stats">
+            <div class="col-sm-4">
+              Week 11: <span class="stats-result" id="week-11">-</span>
+            </div>
+            <div class="col-sm-4">
+              Week 14: <span class="stats-result" id="week-14">-</span>
+            </div>
           </div>
         </div>
+        <!-- END DAVE -->
 
-        <div class="col-sm-4 text-center">
-          <div class="scoreboard" id="scoreboard-rex">
-            <p>Rex: <span id="rex"></span></p>
+        <!-- REX -->
+        <div class="col-sm-4 text-center scoreboard">
+          <div class="row">
+            <div class="col-sm-12" id="scoreboard-rex">
+              <p class="stats-total">Rex: <span id="rex"></span></p>
+            </div>
+          </div>
+          <div class="row stats">
+            <div class="col-sm-4">
+              Week 2: <span class="stats-result" id="week-2">1</span>
+            </div>
+            <div class="col-sm-4">
+              Week 5: <span class="stats-result" id="week-5">-</span>
+            </div>
+            <div class="col-sm-4">
+              Week 9: <span class="stats-result" id="week-9">-</span>
+            </div>
+          </div>
+          <div class="row stats">
+            <div class="col-sm-4">
+              Week 12: <span class="stats-result" id="week-12">-</span>
+            </div>
+            <div class="col-sm-4">
+              Week 15: <span class="stats-result" id="week-15">-</span>
+            </div>
           </div>
         </div>
+        <!-- END REX -->
 
-        <div class="col-sm-4 text-center">
-          <div class="scoreboard" id="scoreboard-tim">
-            <p>Tim: <span id="tim"></span></p>
+        <!-- TIM -->
+        <div class="col-sm-4 text-center scoreboard">
+          <div class="row">
+            <div class="col-sm-12" id="scoreboard-tim">
+              <p class="stats-total">Tim: <span id="tim"></span></p>
+            </div>
+          </div>
+          <div class="row stats">
+            <div class="col-sm-4">
+              Week 3: <span class="stats-result" id="week-3">-</span>
+            </div>
+            <div class="col-sm-4">
+              Week 7: <span class="stats-result" id="week-7">-</span>
+            </div>
+            <div class="col-sm-4">
+              Week 10: <span class="stats-result" id="week-10">-</span>
+            </div>
+          </div>
+          <div class="row stats">
+            <div class="col-sm-4">
+              Week 13: <span class="stats-result" id="week-13">-</span>
+            </div>
+            <div class="col-sm-4">
+              Week 16: <span class="stats-result" id="week-16">-</span>
+            </div>
           </div>
         </div>
-
-        <!--
-        <div class="col-sm-4 text-center my-auto"><p class="display-score">Dave: <span id="dave"></span></p></div>
-        <div class="col-sm-4 text-center my-auto"><p class="display-score">Rex: <span id="rex"></span></p></div>
-        <div class="col-sm-4 text-center my-auto"><p class="display-score">Tim: <span id="tim"></span></p></div>
-        -->
+        <!-- END TIM -->
 
       </div>
     </div> 
   </body>
 </html>
-
-<script>
-
-const url = "https://mvr35kmrh0.execute-api.us-east-2.amazonaws.com/api/touchdowns"
-var obj;
-var endStr;
-
-fetch(url, {
-  headers: {
-    'Content-Type': 'application/json',
-  }
-})
-  .then(response => response.json())
-  .then(data => {
-    obj = data;
-  })
-  .then(() => {
-    document.getElementById("dave").innerHTML = obj.Dave;
-    document.getElementById("rex").innerHTML = obj.Rex;
-    document.getElementById("tim").innerHTML = obj.Tim;
-
-    // highlight current leader
-    if ((obj.Dave > obj.Rex) && (obj.Dave > obj.Tim)) {
-      document.getElementById("scoreboard-dave").style.backgroundColor = "green";
-      document.getElementById("scoreboard-dave").style.color = "white";
-    }
-    else if ((obj.Rex > obj.Dave) && (obj.Rex > obj.Tim)) {
-      document.getElementById("scoreboard-rex").style.backgroundColor = "green";
-      document.getElementById("scoreboard-rex").style.color = "white";
-    }
-    else if ((obj.Tim > obj.Dave) && (obj.Tim > obj.Rex)) {
-      document.getElementById("scoreboard-tim").style.backgroundColor = "green";
-      document.getElementById("scoreboard-tim").style.color = "white";
-    }
-    
-    
-  });
-
-</script>
