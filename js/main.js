@@ -13,6 +13,11 @@ function TallyTds(){
             obj = data;
         })
         .then(() => {
+            //console.log(obj.TdsByWeek[1]);
+            for (var i = 1; i <= obj.TdsByWeek.length; i++) {
+                document.getElementById("week-" + i.toString()).innerHTML = obj.TdsByWeek[i-1];
+            }
+
             document.getElementById("dave").innerHTML = obj.Dave;
             document.getElementById("rex").innerHTML = obj.Rex;
             document.getElementById("tim").innerHTML = obj.Tim;
