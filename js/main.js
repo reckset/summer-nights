@@ -22,17 +22,17 @@ function TallyTds(){
             document.getElementById("rex").innerHTML = obj.Rex;
             document.getElementById("tim").innerHTML = obj.Tim;
     
-            // highlight current leader
-            if ((obj.Dave > obj.Rex) && (obj.Dave > obj.Tim)) {
-            document.getElementById("scoreboard-dave").style.backgroundColor = "green";
+            // highlight current lagger
+            if ((obj.Dave <= obj.Rex) && (obj.Dave <= obj.Tim)) {
+            document.getElementById("scoreboard-dave").style.backgroundColor = "orange";
             document.getElementById("scoreboard-dave").style.color = "white";
             }
-            else if ((obj.Rex > obj.Dave) && (obj.Rex > obj.Tim)) {
-            document.getElementById("scoreboard-rex").style.backgroundColor = "green";
+            if ((obj.Rex <= obj.Dave) && (obj.Rex <= obj.Tim)) {
+            document.getElementById("scoreboard-rex").style.backgroundColor = "orange";
             document.getElementById("scoreboard-rex").style.color = "white";
             }
-            else if ((obj.Tim > obj.Dave) && (obj.Tim > obj.Rex)) {
-            document.getElementById("scoreboard-tim").style.backgroundColor = "green";
+            if ((obj.Tim <= obj.Dave) && (obj.Tim <= obj.Rex)) {
+            document.getElementById("scoreboard-tim").style.backgroundColor = "orange";
             document.getElementById("scoreboard-tim").style.color = "white";
             }
         });
