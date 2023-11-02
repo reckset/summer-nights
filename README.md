@@ -11,3 +11,7 @@ AWS website
 1.1.1 : Nov 2, 2023
 - Fixed "bye week" bug
 - Leader highlighted in green (laggers still orange)
+
+1.1.2 : Nov 2, 2023
+- og images
+- favicon
